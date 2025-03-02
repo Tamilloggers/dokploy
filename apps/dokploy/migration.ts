@@ -2,9 +2,8 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
 
-const connectionString = process.env.DATABASE_URL!;
-
-const sql = postgres(connectionString, { max: 1 });
+const connectionString = "postgres://koyeb-adm:npg_3vJmupFM0Ugf@ep-super-term-a2neerqg.eu-central-1.pg.koyeb.app/koyebdb?sslmode=require";
+const sql = postgres(connectionString, { ssl: 'require', max: 1 });
 const db = drizzle(sql);
 
 await migrate(db, { migrationsFolder: "drizzle" })
