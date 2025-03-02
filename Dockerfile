@@ -15,6 +15,9 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 # Deploy only the dokploy app
 
 ENV NODE_ENV=production
+# Run database migrations
+RUN pnpm --filter=./apps/dokploy exec node -e "import('./drizzle/migrate.js')"
+
 RUN pnpm --filter=@dokploy/server build
 RUN pnpm --filter=./apps/dokploy run build
 
